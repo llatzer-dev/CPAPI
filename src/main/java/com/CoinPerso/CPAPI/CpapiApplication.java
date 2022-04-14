@@ -8,9 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CpapiApplication implements CommandLineRunner {
+public class CpapiApplication /*implements CommandLineRunner*/ {
 
-	private final UserRepository userRepository;
+	/*private final UserRepository userRepository;
 
 	@Autowired
 	public CpapiApplication(UserRepository userRepository){
@@ -24,12 +24,17 @@ public class CpapiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception{
 		if (userRepository.findAll().isEmpty()){
-			userRepository.save(new User("Alice", "Smith"));
-			userRepository.save(new User("Bob", "Smith"));
+			*//*userRepository.save(new User("Alice", "Smith"));
+			userRepository.save(new User("Bob", "Smith"));*//*
 		}
 
 		for (User user: userRepository.findAll()){
 			System.out.println(user);
 		}
+	}*/
+
+	public static void main(String[] args) {
+		SpringApplication.run(CpapiApplication.class, args);
 	}
+
 }
