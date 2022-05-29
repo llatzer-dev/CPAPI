@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface PortfolioRepositoy extends MongoRepository<Portfolio, String> {
     Boolean existsByIdUser(String userId);
     Optional<Portfolio> getPortfolioByIdUser(String userId);
+
+    void deleteByIdUser(String id);
 }
