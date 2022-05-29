@@ -43,9 +43,6 @@ public class PortfolioController {
         Optional<Portfolio> portfolio;
         portfolio = portfolioRepositoy.getPortfolioByIdUser(id);
 
-        System.out.println("----- GET PORTFOLIO -----");
-        System.out.println(portfolio.toString());
-
         return new ResponseEntity<>(portfolio, HttpStatus.OK);
     }
 
@@ -56,11 +53,6 @@ public class PortfolioController {
                     .badRequest()
                     .body(new MessageResponse("Error: That User doesn't exist!"));
         }
-        /*if (portfolioRepositoy.existsByIdUser(portfolioRequest.getUserId())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: The User has already a portfolio!"));
-        }*/
 
         Portfolio portfolio = portfolioRequest.getPortfolio();
         portfolio.setIdUser(portfolioRequest.getUserId());
@@ -71,13 +63,6 @@ public class PortfolioController {
         return ResponseEntity.ok(new MessageResponse("Portfolio created successfully!"));
     }
 
-    /*@PutMapping(value = "/clientes/{dni}", produces = "application/json",
-            consumes = "application/json")
-    public ResponseEntity<Cliente> modifyCliente(@PathVariable String dni, @RequestBody Cliente newCliente) {
-        Cliente cliente = clienteService.modifyCliente(dni, newCliente);
-        return new ResponseEntity<>(cliente, HttpStatus.OK);
-    }*/
-
     @PutMapping("/{id}")
     public ResponseEntity<?> modifyPortfolio(@PathVariable String id, @RequestBody Portfolio newPortfolio){
         if (!userRepository.existsById(id)) {
@@ -85,13 +70,8 @@ public class PortfolioController {
                     .badRequest()
                     .body(new MessageResponse("Error: That User doesn't exist!"));
         }
-        /*if (!portfolioRepositoy.existsByIdUser(id)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: The User doesn't have a portfolio!"));
-        }*/
 
-        Portfolio portfolio = portfolioService.modifyPortfolio(id, newPortfolio);
+        portfolioService.modifyPortfolio(id, newPortfolio);
 
         return ResponseEntity.ok(new MessageResponse("Asset deleted succesfully!"));
     }

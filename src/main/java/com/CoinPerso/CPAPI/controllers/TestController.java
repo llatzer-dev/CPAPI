@@ -26,17 +26,11 @@ public class TestController {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-    private final PortfolioRepositoy portfolioRepositoy;
-
-    @Autowired
-    private final PortfolioService portfolioService;
 
     @Autowired
     public TestController(RoleRepository roleRepository, UserRepository userRepository, PortfolioRepositoy portfolioRepositoy, PortfolioService portfolioService){
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-        this.portfolioRepositoy = portfolioRepositoy;
-        this.portfolioService = portfolioService;
     }
 
     @GetMapping("/all")
@@ -71,68 +65,5 @@ public class TestController {
     public String adminAccess() {
         return "Admin Board.";
     }
-
-    /*@GetMapping("/portfolio/userId/{id}")
-    public boolean existsPortfolioByIdUser(@PathVariable String id){
-        return portfolioRepositoy.existsByIdUser(id);
-    }
-
-    @GetMapping("/portfolio/{id}")
-    public ResponseEntity<Optional<Portfolio>> getPortfolioById(@PathVariable String id){
-        Optional<Portfolio> portfolio;
-        portfolio = portfolioRepositoy.getPortfolioByIdUser(id);
-
-        System.out.println("----- GET PORTFOLIO -----");
-        System.out.println(portfolio.toString());
-
-        return new ResponseEntity<>(portfolio, HttpStatus.OK);
-    }
-
-    @PostMapping("/portfolio")
-    public ResponseEntity<?> registerPortfolio(@Valid @RequestBody PortfolioRequest portfolioRequest) {
-        if (!userRepository.existsById(portfolioRequest.getUserId())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: That User doesn't exist!"));
-        }
-        *//*if (portfolioRepositoy.existsByIdUser(portfolioRequest.getUserId())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: The User has already a portfolio!"));
-        }*//*
-
-        Portfolio portfolio = portfolioRequest.getPortfolio();
-        portfolio.setIdUser(portfolioRequest.getUserId());
-        portfolio.setAssets(portfolioRequest.getPortfolio().getAssets());
-
-        portfolioRepositoy.save(portfolio);
-
-        return ResponseEntity.ok(new MessageResponse("Portfolio created successfully!"));
-    }
-
-    *//*@PutMapping(value = "/clientes/{dni}", produces = "application/json",
-            consumes = "application/json")
-    public ResponseEntity<Cliente> modifyCliente(@PathVariable String dni, @RequestBody Cliente newCliente) {
-        Cliente cliente = clienteService.modifyCliente(dni, newCliente);
-        return new ResponseEntity<>(cliente, HttpStatus.OK);
-    }*//*
-
-    @PutMapping("/portfolio/{id}")
-    public ResponseEntity<?> modifyPortfolio(@PathVariable String id, @RequestBody Portfolio newPortfolio){
-        if (!userRepository.existsById(id)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: That User doesn't exist!"));
-        }
-        *//*if (!portfolioRepositoy.existsByIdUser(id)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: The User doesn't have a portfolio!"));
-        }*//*
-
-        Portfolio portfolio = portfolioService.modifyPortfolio(id, newPortfolio);
-
-        return ResponseEntity.ok(new MessageResponse("Asset deleted succesfully!"));
-    }*/
 
 }
